@@ -12,11 +12,12 @@ import java.time.Duration;
 
 public class OrderPage {
     private WebDriver driver;
+
     public OrderPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    public boolean setFormOrder(){
+    public boolean setFormOrder() {
         return driver.findElement(ElementsOrderPage.FORM_ORDER).isDisplayed();
     }
 
@@ -25,9 +26,9 @@ public class OrderPage {
         wait2.until(ExpectedConditions.visibilityOfElementLocated(eaitElement));
     }
 
-    public void scrollPage(By scrollElement){
+    public void scrollPage(By scrollElement) {
         WebElement element = driver.findElement(scrollElement);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 
     public void setUsername(String username) {
@@ -38,60 +39,69 @@ public class OrderPage {
         driver.findElement(ElementsOrderPage.SURNAME_FIELD).sendKeys(surname);
     }
 
-    public void setAddress(String address){
+    public void setAddress(String address) {
         driver.findElement(ElementsOrderPage.ADDRESS_FIELD).sendKeys(address);
     }
 
-    public void setMetroStation(String subwayStation){
-        driver.findElement(ElementsOrderPage.METRO_STATION_FIELD).click();
-        isWaitOrderDisplayed(By.xpath(".//button/div[text()='"+subwayStation+"']"));
-        scrollPage(By.xpath(".//button/div[text()='"+subwayStation+"']"));
-        driver.findElement(By.xpath(".//button/div[text()='"+subwayStation+"']")).click();
+    public By setSubway(String station) {
+        return By.xpath(".//button/div[text()='" + station + "']");
     }
 
-    public void setPhone(String phone){
+    public void setMetroStation(String subwayStation) {
+        driver.findElement(ElementsOrderPage.METRO_STATION_FIELD).click();
+        isWaitOrderDisplayed(setSubway(subwayStation));
+        scrollPage(setSubway(subwayStation));
+        driver.findElement(setSubway(subwayStation)).click();
+    }
+
+    public void setPhone(String phone) {
         driver.findElement(ElementsOrderPage.PHONE_FIELD).sendKeys(phone);
     }
 
-    public void clickNext(){
+    public void clickNext() {
         driver.findElement(ElementsOrderPage.NEXT_BUTTON).click();
     }
 
-    public void setDeliveryDate(String deliveryDate){
+    public void setDeliveryDate(String deliveryDate) {
         driver.findElement(ElementsOrderPage.DELIVERY_DATE_FIELD).sendKeys(deliveryDate);
     }
 
-    public void setRentalPeriod(String period){
-        driver.findElement(ElementsOrderPage.RENTAL_PERIOD_FIELD).click();
-        isWaitOrderDisplayed(By.xpath(".//div[text()='"+period+"']"));
-        driver.findElement(By.xpath(".//div[text()='"+period+"']")).click();
+    public By setPeriod(String rentalPeriod) {
+        return By.xpath(".//div[text()='" + rentalPeriod + "']");
     }
 
-    public void clickScooterColorBlackReal(){
+    public void setRentalPeriod(String period) {
+        driver.findElement(ElementsOrderPage.RENTAL_PERIOD_FIELD).click();
+        isWaitOrderDisplayed(setPeriod(period));
+        driver.findElement(setPeriod(period)).click();
+    }
+
+    public void clickScooterColorBlackReal() {
         driver.findElement(ElementsOrderPage.COLOR_BLACK_PEARL_FIELD).click();
     }
 
-    public void clickScooterColorGrayHopelessness(){
+    public void clickScooterColorGrayHopelessness() {
         driver.findElement(ElementsOrderPage.COLOR_GRAY_HOPELESSNESS_FIELD).click();
     }
-    public void setCourierComment(String courierComment){
+
+    public void setCourierComment(String courierComment) {
         driver.findElement(ElementsOrderPage.COURIER_COMMENT_FIELD).sendKeys(courierComment);
     }
 
-    public void clickOrderFormButton(){
+    public void clickOrderFormButton() {
         driver.findElement(ElementsOrderPage.ORDER_FORM_BUTTON).click();
     }
 
-    public void clickOrderYesFormButton(){
+    public void clickOrderYesFormButton() {
         isWaitOrderDisplayed(ElementsOrderPage.ORDER_YES_FORM_BUTTON);
         driver.findElement(ElementsOrderPage.ORDER_YES_FORM_BUTTON).click();
     }
 
-    public String getOrderIsProcessed(){
+    public String getOrderIsProcessed() {
         return driver.findElement(ElementsOrderPage.ORDER_IS_PROCESSED).getText();
     }
 
-    public void completingTheOrderForm(String name,String surname, String address,String metro, String phone,String rentalPeriod,String date, String comment){
+    public void completingTheOrderForm(String name, String surname, String address, String metro, String phone, String rentalPeriod, String date, String comment) {
         setUsername(name); // *
         setSurname(surname); // *
         setMetroStation(metro); // *

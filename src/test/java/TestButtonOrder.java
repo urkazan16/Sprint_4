@@ -13,6 +13,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class TestButtonOrder {
     private WebDriver driver;
+
     @Before
     public void startUpChrome() {
         WebDriverManager.chromedriver().setup();
@@ -25,12 +26,12 @@ public class TestButtonOrder {
     //@Before
     public void startUpFirefox() {
         FirefoxOptions options = new FirefoxOptions();
-        System.setProperty("webdriver.gecko.driver","/Users/user/geckodriver/geckodriver");
+        System.setProperty("webdriver.gecko.driver", "/Users/user/geckodriver/geckodriver");
         driver = new FirefoxDriver(options);
     }
 
     @Test
-    public void checkOrderButtonHeader(){
+    public void checkOrderButtonHeader() {
         MainPage objMainPage = new MainPage(driver);
         OrderPage objOrderPage = new OrderPage(driver);
         objMainPage.open(); //+
@@ -39,7 +40,7 @@ public class TestButtonOrder {
     }
 
     @Test
-    public void checkOrderButtonMain(){
+    public void checkOrderButtonMain() {
         MainPage objMainPage = new MainPage(driver);
         OrderPage objOrderPage = new OrderPage(driver);
         objMainPage.open();

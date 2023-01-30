@@ -12,17 +12,18 @@ import java.time.Duration;
 
 public class MainPage {
     private WebDriver driver;
+
     public MainPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void open(){
+    public void open() {
         driver.get(ElementsMainPage.URL);
     }
 
-    public void scrollPage(By scrollElement){
+    public void scrollPage(By scrollElement) {
         WebElement element = driver.findElement(scrollElement);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 
     public void isWaitOrderDisplayed(By eaitElement) {
@@ -30,14 +31,15 @@ public class MainPage {
         wait2.until(ExpectedConditions.visibilityOfElementLocated(eaitElement));
     }
 
-    public void clickOrderButtonHeader(){
+    public void clickOrderButtonHeader() {
         driver.findElement(ElementsMainPage.ORDER_BUTTON_HEADER).click();
     }
 
-    public void clickOrderButtonMain(){
+    public void clickOrderButtonMain() {
         driver.findElement(ElementsMainPage.ORDER_BUTTON_MAIN).click();
     }
-    public String getTextTab(int number){
+
+    public String getTextTab(int number) {
         scrollPage(ElementsMainPage.TABS);
         driver.findElement(ElementsMainPage.BUTTON_BLOCK_COOKIES).click();
         driver.findElements(ElementsMainPage.TABS).get(number).click();
